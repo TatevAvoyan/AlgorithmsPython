@@ -1,15 +1,21 @@
-data = [5, 1, 4, 3, 2, 10, 8]
+data = [5, 2, 7, 4, 1, 3, 6]
 
-def bubble_sort(data):
-    swappend = True
-    while swappend:
-        swappend = False
-        for i in range(len(data)-1):
-            if data[i] > data[i+1]:
-                data[i], data[i+1] = data[i+1], data[i]
-                swappend = True
-                print(data)
+def selection_sort(data):
+    marker = 0
+    while marker < len(data):
+        min_index = marker
+        for i in range(marker, len(data)):
+            if data[marker] > data[i]:
+                if data[i] < data[min_index]:
+                    min_index = i
+        data[marker], data[min_index] = data[min_index], data[marker]
+        print(data)
+
+
+        marker+=1
+
     print(data)
 
 
-bubble_sort(data)
+
+selection_sort(data)
