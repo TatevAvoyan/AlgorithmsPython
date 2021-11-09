@@ -17,5 +17,5 @@ def bubble_sort(data):
     print(data)
     print(steps)
 
-
+# 28 in data, 7 in data_best, 49 in data_worst
 bubble_sort(data_worst)
