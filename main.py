@@ -1,11 +1,21 @@
-data = [5, 2, 7, 4, 1, 3, 6]
+data = [5, 1, 4, 3, 2, 10, 8]
+data_best = [1, 2, 3, 4, 5, 8, 10]
+data_worst = [10, 8, 5, 4, 3, 2, 1]
 
-def insertion_sort(data):
+def bubble_sort(data):
+    steps = 0
+    swappend = True
+    while swappend:
+        steps += 1
+        swappend = False
+        for i in range(len(data)-1):
+            steps += 1
+            if data[i] > data[i+1]:
+                data[i], data[i+1] = data[i+1], data[i]
+                swappend = True
+                print(data)
+    print(data)
+    print(steps)
 
-    for i in range(1, len(data)):
-        while data[i-1] > data[i] and i > 0:
-            data[i], data[i-1] = data[i-1], data[i]
-            i -= 1
-        print(data)
 
-insertion_sort(data)
+bubble_sort(data_worst)
