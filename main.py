@@ -1,43 +1,58 @@
-data = [8, 5, 2, 7, 6, 4, 1, 3]
-data1 = [2, 5, 7, 8]
-data2 = [1, 3, 4, 6]
+data = [3, 5, 2, 7, 6, 4, 1, 8]
 
-def sort(array1, array2):
-    print("Array 1: ", array1)
-    print("Array 2: ", array2)
-    print("============================")
-    result = []
-    i, j = 0, 0
-
-    while i < len(array1) and j < len(array2):
-        if array1[i] < array2[j]:
-            result.append(array1[i])
-            i += 1
-        else:
-            result.append(array2[j])
-            j += 1
-
-    while j < len(array2):
-        result.append(array2[j])
-        j += 1
-
-    while i < len(array1):
-        result.append(array1[i])
-        i += 1
-
-    return result
-
-def devide(data):
-
+def qs_easy(data):
     if len(data) < 2:
         return data
-    else:
-        middle = len(data) // 2
-        array1 = devide(data[0:middle])
-        array2 = devide(data[middle:])
-        return sort(array1, array2)
+
+    pivot = data.pop()
+    smaller, larger = [], []
+    for item in data:
+        if item < pivot:
+            smaller.append(item)
+        else:
+            larger.append(item)
+    return qs_easy(smaller) + [pivot] + qs_easy(larger)
+
+def sort(data, l, r):
+    pivotIndex = get_pivot(data, l, r)
+    pivotValue = data[pivotIndex]
+    print((data[l:r+1]))
+    print(pivotValue)
+    print("===============")
+
+    data[l], data[pivotIndex] = data[pivotIndex], data[l]
+    border = l
+    for i in range(l, r + 1):
+        if data[i] < pivotValue:
+            border += 1
+            data[border], data[i] = data[i], data[border]
+
+    data[l], data[border] = data[border], data[l]
+    return border
+
+def qs_inplace(data, l, r):
+    if l < r:
+        border = sort(data, l, r)
+        qs_inplace(data, l, border-1)
+        qs_inplace(data, border+1, r)
+
+def get_pivot(data, l, r):
+    middleIndex = (l + r) // 2
+
+    if (data[l] >= data[r] and data[l] <= data[middleIndex]) or \
+            (data[l] <= data[r] and data[l] >= data[middleIndex]):
+        pivotIndex = l
+    elif (data[r] >= data[l] and data[r] <= data[middleIndex]) or \
+            (data[r] <= data[l] and data[r] >= data[middleIndex]):
+        pivotIndex = r
+    elif (data[middleIndex] >= data[l] and data[middleIndex] <= data[r]) or \
+            (data[middleIndex] <= data[l] and data[middleIndex] >= data[r]):
+        pivotIndex = middleIndex
+    return pivotIndex
 
 
+def quick_sort(data):
+    qs_inplace(data, 0, len(data) - 1)
 
-
-print(devide(data))
+quick_sort(data)
+print(data)
