@@ -2,6 +2,7 @@ data = [8, 5, 2, 7, 6, 4, 1, 3]
 data1 = [2, 5, 7, 8]
 data2 = [1, 3, 4, 6]
 
+
 def sort(array1, array2):
     print("Array 1: ", array1)
     print("Array 2: ", array2)
@@ -27,6 +28,7 @@ def sort(array1, array2):
 
     return result
 
+
 def devide(data):
 
     if len(data) < 2:
@@ -36,8 +38,6 @@ def devide(data):
         array1 = devide(data[0:middle])
         array2 = devide(data[middle:])
         return sort(array1, array2)
-
-
 
 
 print(devide(data))
